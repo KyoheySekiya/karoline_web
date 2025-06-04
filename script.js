@@ -70,4 +70,37 @@ document.addEventListener("DOMContentLoaded", function () {
       video.currentTime = 0;
     });
   });
+
+  // ここから閉じるボタン作成
+  const closeBtn = document.createElement("button");
+  closeBtn.textContent = "✕ 閉じる";
+  closeBtn.className = "fullscreen-close-btn";
+  closeBtn.style.display = "none";
+  document.body.appendChild(closeBtn);
+
+  closeBtn.addEventListener("click", () => {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen();
+    }
+  });
+
+  // 全画面変化の監視
+  function onFullscreenChange() {
+    const isFullscreen = !!document.fullscreenElement;
+    closeBtn.style.display = isFullscreen ? "block" : "none";
+
+    if (!isFullscreen) {
+      document.querySelectorAll(".fullscreen-image").forEach(img => {
+        img.classList.remove("fullscreen-image");
+      });
+    }
+  }
+
+  document.addEventListener("fullscreenchange", onFullscreenChange);
+  document.addEventListener("webkitfullscreenchange", onFullscreenChange);
+  document.addEventListener("msfullscreenchange", onFullscreenChange);
 });

@@ -91,6 +91,25 @@ body {
   background-color: #000;
 }
 
+.fullscreen-close-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 8px 16px;
+  font-size: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  z-index: 9999;
+  cursor: pointer;
+  display: none;
+}
+
+.fullscreen-close-btn:hover {
+  background: rgba(255, 0, 0, 0.8);
+}
+
 .gallery-item_video {
   width: 100%;
   max-width: 100%;

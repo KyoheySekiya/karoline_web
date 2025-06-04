@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     div.className = "gallery-item";
 
     const video = document.createElement("video");
-    video.src = `assets/movies/MOV_${i}.MOV`;
+    video.src = `assets/movies/MOV_${i}.mp4`;
     video.muted = true;
     video.playsInline = true;
     video.preload = "metadata";

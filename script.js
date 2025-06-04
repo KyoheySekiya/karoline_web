@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const img = document.createElement("img");
     img.src = `assets/images/IMG_${i}.jpg`;
     img.alt = `イメージ写真 ${i}`;
+    img.className = "gallery-item_img";
 
     div.appendChild(img);
     gallery.appendChild(div);
@@ -26,17 +27,28 @@ document.addEventListener("DOMContentLoaded", function () {
     video.muted = true;
     video.playsInline = true;
     video.preload = "metadata";
-    video.className = "fullscreen-video";
+    video.className = "gallery-item_video";
 
     div.appendChild(video);
     gallery.appendChild(div);
   }
 
-  // ▼ 動画のインタラクション設定
-  const videos = document.querySelectorAll(".fullscreen-video");
+  // 画像クリックで全画面表示 + class追加
+  document.querySelectorAll(".gallery-item_img").forEach(img => {
+    img.addEventListener("click", () => {
+      if (img.requestFullscreen) {
+        img.requestFullscreen();
+      } else if (img.webkitRequestFullscreen) {
+        img.webkitRequestFullscreen();
+      } else if (img.msRequestFullscreen) {
+        img.msRequestFullscreen();
+      }
+      img.classList.add("fullscreen-image");
+    });
+  });
 
-  videos.forEach((video) => {
-    // クリックで全画面表示
+  // 動画クリックで全画面表示 +再生
+  document.querySelectorAll(".gallery-item_video").forEach(video => {
     video.addEventListener("click", () => {
       if (video.requestFullscreen) {
         video.requestFullscreen();

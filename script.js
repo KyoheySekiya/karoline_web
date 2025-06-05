@@ -2,13 +2,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const gallery = document.getElementById("gallery");
 
   // ▼ 自動で画像を追加
-  const imageCount = 11; // IMG_1.jpg ～ IMG_11.jpg
+  const imageCount = 95; // IMG_1.jpg ～ IMG_11.jpg
   for (let i = 1; i <= imageCount; i++) {
     const div = document.createElement("div");
     div.className = "gallery-item";
 
     const img = document.createElement("img");
-    img.src = `assets/images/IMG_${i}.jpg`;
+    img.src = `assets/images/LINE_ALBUM_Photos (work)_250605_${i}.jpg`;
     img.alt = `イメージ写真 ${i}`;
     img.className = "gallery-item_img";
 
@@ -17,21 +17,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ▼ 自動で動画を追加
-  const videoCount = 1; // MOV_1.MOV ～（必要に応じて増やす）
-  for (let i = 1; i <= videoCount; i++) {
-    const div = document.createElement("div");
-    div.className = "gallery-item";
+  // const videoCount = 1; // MOV_1.MOV ～（必要に応じて増やす）
+  // for (let i = 1; i <= videoCount; i++) {
+  //   const div = document.createElement("div");
+  //   div.className = "gallery-item";
 
-    const video = document.createElement("video");
-    video.src = `assets/movies/MOV_${i}.mp4`;
-    video.muted = true;
-    video.playsInline = true;
-    video.preload = "metadata";
-    video.className = "gallery-item_video";
+  //   const video = document.createElement("video");
+  //   video.src = `assets/movies/MOV_${i}.mp4`;
+  //   video.muted = true;
+  //   video.playsInline = true;
+  //   video.preload = "metadata";
+  //   video.className = "gallery-item_video";
 
-    div.appendChild(video);
-    gallery.appendChild(div);
-  }
+  //   div.appendChild(video);
+  //   gallery.appendChild(div);
+  // }
 
   // 画像クリックで全画面表示 + class追加
   document.querySelectorAll(".gallery-item_img").forEach(img => {

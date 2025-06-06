@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const gallery = document.getElementById("gallery");
 
   // ▼ 自動で画像を追加
-  const imageCount = 95; // IMG_1.jpg ～ IMG_11.jpg
+  const imageCount = 95;
   for (let i = 1; i <= imageCount; i++) {
     const div = document.createElement("div");
     div.className = "gallery-item";
@@ -16,36 +16,42 @@ document.addEventListener("DOMContentLoaded", function () {
     gallery.appendChild(div);
   }
 
-  // ▼ 自動で動画を追加
-  // const videoCount = 1; // MOV_1.MOV ～（必要に応じて増やす）
-  // for (let i = 1; i <= videoCount; i++) {
-  //   const div = document.createElement("div");
-  //   div.className = "gallery-item";
+document.querySelectorAll(".gallery-item_img").forEach(img => {
+  img.addEventListener("click", () => {
+    // ラッパーを作る
+    const wrapper = document.createElement("div");
+    wrapper.className = "fullscreen-wrapper";
 
-  //   const video = document.createElement("video");
-  //   video.src = `assets/movies/MOV_${i}.mp4`;
-  //   video.muted = true;
-  //   video.playsInline = true;
-  //   video.preload = "metadata";
-  //   video.className = "gallery-item_video";
+    const clone = img.cloneNode();
+    clone.classList.add("fullscreen-image");
+    wrapper.appendChild(clone);
+    document.body.appendChild(wrapper);
 
-  //   div.appendChild(video);
-  //   gallery.appendChild(div);
-  // }
+    // 閉じるボタン
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "✕ 閉じる";
+    closeBtn.className = "fullscreen-close";
+    wrapper.appendChild(closeBtn);
 
-  // 画像クリックで全画面表示 + class追加
-  document.querySelectorAll(".gallery-item_img").forEach(img => {
-    img.addEventListener("click", () => {
-      if (img.requestFullscreen) {
-        img.requestFullscreen();
-      } else if (img.webkitRequestFullscreen) {
-        img.webkitRequestFullscreen();
-      } else if (img.msRequestFullscreen) {
-        img.msRequestFullscreen();
+    closeBtn.addEventListener("click", () => {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
       }
-      img.classList.add("fullscreen-image");
+      document.body.removeChild(wrapper);
     });
+
+    // 全画面へ
+    if (wrapper.requestFullscreen) {
+      wrapper.requestFullscreen().catch(err => {
+        console.error("フルスクリーンに失敗:", err);
+      });
+    } else if (wrapper.webkitRequestFullscreen) {
+      wrapper.webkitRequestFullscreen();
+    } else if (wrapper.msRequestFullscreen) {
+      wrapper.msRequestFullscreen();
+    }
   });
+});
 
   // 動画クリックで全画面表示 +再生
   document.querySelectorAll(".gallery-item_video").forEach(video => {
